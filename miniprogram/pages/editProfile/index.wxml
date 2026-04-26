@@ -1,0 +1,25 @@
+<view class="edit-page">
+  <view class="card">
+    <view class="title">头像与昵称</view>
+    <view class="subtitle">首次登录默认取微信资料，你也可以在这里修改。</view>
+
+    <button class="avatar-btn" open-type="chooseAvatar" bindchooseavatar="handleChooseAvatar">
+      <image
+        class="avatar"
+        src="{{avatarUrl || '/images/avatar.png'}}"
+        mode="aspectFill"
+      ></image>
+      <view class="avatar-text">点击更换头像</view>
+    </button>
+
+    <input
+      class="input"
+      type="nickname"
+      placeholder="请输入昵称"
+      value="{{nickName}}"
+      bindinput="handleNicknameInput"
+    />
+  </view>
+
+  <button class="save-btn" loading="{{saving}}" bindtap="handleSave">保存资料</button>
+</view>

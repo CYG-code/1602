@@ -1,0 +1,93 @@
+.filter-mask {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(15, 23, 42, 0.45);
+  z-index: 99;
+}
+
+.filter-panel {
+  position: absolute;
+  left: 24rpx;
+  right: 24rpx;
+  bottom: calc(24rpx + env(safe-area-inset-bottom));
+  border-radius: 28rpx;
+  background: #ffffff;
+  box-shadow: 0 30rpx 60rpx rgba(15, 23, 42, 0.3);
+  padding: 24rpx;
+}
+
+.filter-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16rpx;
+}
+
+.filter-title {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.filter-close {
+  font-size: 24rpx;
+  color: #667085;
+}
+
+.group + .group {
+  margin-top: 16rpx;
+}
+
+.group-title {
+  font-size: 24rpx;
+  color: #475467;
+  margin-bottom: 10rpx;
+}
+
+.chip-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10rpx;
+}
+
+.chip {
+  border-radius: 999rpx;
+  border: 1rpx solid #e5e7eb;
+  background: #f8fafc;
+  color: #475467;
+  font-size: 23rpx;
+  line-height: 50rpx;
+  padding: 0 18rpx;
+}
+
+.chip--active {
+  border-color: rgba(56, 142, 60, 0.36);
+  background: rgba(76, 175, 80, 0.16);
+  color: #2f7d32;
+}
+
+.actions {
+  margin-top: 22rpx;
+  display: flex;
+  gap: 12rpx;
+}
+
+.btn {
+  flex: 1;
+  border-radius: 999rpx;
+  font-size: 26rpx;
+  line-height: 82rpx;
+}
+
+.btn--ghost {
+  background: #eef2f6;
+  color: #4b5563;
+}
+
+.btn--primary {
+  background: #4caf50;
+  color: #ffffff;
+}

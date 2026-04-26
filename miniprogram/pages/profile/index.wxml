@@ -1,0 +1,37 @@
+<view class="profile-page">
+  <view class="profile-card">
+    <block wx:if="{{isLoggedIn && userProfile}}">
+      <image class="avatar" src="{{userProfile.avatarUrl || '/images/avatar.png'}}" mode="aspectFill"></image>
+      <view class="nick">{{userProfile.nickName || '微信用户'}}</view>
+      <view class="sub">已登录，可继续打卡、收藏等功能</view>
+      <button class="edit-btn" bindtap="handleGoEditProfile">修改头像与昵称</button>
+    </block>
+
+    <block wx:else>
+      <view class="nick">欢迎使用 1602 美食录</view>
+      <view class="sub">登录后可发布打卡、收藏店铺并同步个人数据</view>
+      <button class="login-btn" bindtap="handleOpenLogin">微信授权登录</button>
+    </block>
+  </view>
+
+  <view class="menu-card">
+    <view class="menu-item" bindtap="handleGoMyCheckins">
+      <view class="menu-title">我的打卡</view>
+      <view class="menu-arrow">></view>
+    </view>
+    <view class="menu-item" bindtap="handleGoMyFavorites">
+      <view class="menu-title">我的收藏</view>
+      <view class="menu-arrow">></view>
+    </view>
+  </view>
+
+  <login-modal
+    visible="{{loginModalVisible}}"
+    loading="{{loggingIn}}"
+    title="登录后继续"
+    description="用于识别你的打卡和收藏数据，不会公开你的隐私信息。"
+    bind:close="handleCloseLoginModal"
+    bind:success="handleLoginSuccess"
+    bind:error="handleLoginError"
+  />
+</view>

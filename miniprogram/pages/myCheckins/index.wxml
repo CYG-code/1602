@@ -1,0 +1,33 @@
+<view class="my-checkins-page">
+  <view wx:if="{{errorMessage}}" class="error-card">{{errorMessage}}</view>
+  <view wx:if="{{loading}}" class="loading-card">加载中...</view>
+
+  <block wx:if="{{!loading && checkins.length > 0}}">
+    <view class="list-wrap">
+      <view wx:for="{{checkins}}" wx:key="_id" class="list-item">
+        <checkin-item
+          checkin="{{item}}"
+          showShopName="{{true}}"
+          bind:liketap="handleCheckinLikeTap"
+          bind:deletetap="handleCheckinDeleteTap"
+        />
+        <view
+          class="go-shop-btn"
+          data-shopid="{{item.shopId}}"
+          data-shopname="{{item.shopName}}"
+          bindtap="handleGoShopDetail"
+        >
+          查看店铺详情
+        </view>
+      </view>
+    </view>
+
+    <button wx:if="{{hasMore}}" class="load-more-btn" loading="{{loadingMore}}" bindtap="handleLoadMore">
+      加载更多
+    </button>
+  </block>
+
+  <view wx:if="{{!loading && !errorMessage && checkins.length === 0}}" class="empty-card">
+    你还没有发布过打卡，去店铺详情页发布第一条吧。
+  </view>
+</view>

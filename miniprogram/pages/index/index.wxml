@@ -1,0 +1,101 @@
+<view class="map-page">
+  <view class="map-page__hero">
+    <view class="map-page__title">店铺检索</view>
+    <view class="map-page__subtitle">基于当前位置和关键词检索店铺，范围与条数均可自定义。</view>
+  </view>
+
+  <view class="search-card">
+    <input
+      class="search-input"
+      placeholder="输入店名/品类/地址关键词"
+      value="{{keyword}}"
+      bindinput="handleKeywordInput"
+      confirm-type="search"
+      bindconfirm="handleSearch"
+    />
+    <button class="search-btn" loading="{{searching}}" bindtap="handleSearch">检索</button>
+  </view>
+
+  <view class="filter-row">
+    <picker range="{{radiusOptions}}" value="{{radiusIndex}}" bindchange="handleRadiusChange">
+      <view class="filter-pill">范围 {{radiusOptions[radiusIndex]}} km</view>
+    </picker>
+    <picker range="{{resultCountOptions}}" value="{{resultCountIndex}}" bindchange="handleResultCountChange">
+      <view class="filter-pill">数量 {{resultCountOptions[resultCountIndex]}} 条</view>
+    </picker>
+    <view class="filter-pill filter-pill--action" bindtap="handleOpenFilterPanel">筛选</view>
+  </view>
+  <view class="filter-summary">{{filterSummary}}</view>
+
+  <view wx:if="{{errorMessage}}" class="map-page__error">{{errorMessage}}</view>
+
+  <map
+    id="shopMap"
+    class="shop-map"
+    latitude="{{latitude}}"
+    longitude="{{longitude}}"
+    scale="{{scale}}"
+    markers="{{markers}}"
+    show-location
+    enable-3D="{{false}}"
+    bindmarkertap="handleMarkerTap"
+    bindregionchange="handleMapRegionChange"
+  ></map>
+
+  <view class="map-page__controls">
+    <button class="map-page__control" bindtap="handleMoveToCurrentLocation">重新定位</button>
+    <button
+      wx:if="{{locationDenied}}"
+      class="map-page__control map-page__control--ghost"
+      bindtap="handleOpenSetting"
+    >
+      打开权限
+    </button>
+  </view>
+
+  <view wx:if="{{loading}}" class="map-page__loading">处理中...</view>
+
+  <view wx:if="{{searched && !loading && shops.length === 0}}" class="empty-card">
+    <view class="empty-title">没有检索到匹配店铺</view>
+    <view class="empty-subtitle">可以基于当前位置新增一个店铺。</view>
+    <button class="empty-action" bindtap="handleGoAddShop">新增店铺</button>
+  </view>
+
+  <view wx:if="{{shops.length > 0}}" class="result-list">
+    <view class="result-list__title">检索结果（{{shops.length}}）</view>
+    <view
+      wx:for="{{shops}}"
+      wx:key="_id"
+      class="result-item {{index === selectedShopIndex ? 'result-item--active' : ''}}"
+      data-index="{{index}}"
+      bindtap="handleSelectShop"
+    >
+      <view class="result-item__name">{{item.name}}</view>
+      <view class="result-item__meta">
+        <text>{{item.category || "美食"}}</text>
+        <text>{{item.distance}} m</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="map-page__card" wx:if="{{selectedShop}}">
+    <shop-card shop="{{selectedShop}}" binddetailtap="handleCardDetailTap"></shop-card>
+  </view>
+
+  <view wx:if="{{searched && !loading}}" class="manual-add-row">
+    <text class="manual-add-tip">没找到想要的店铺？</text>
+    <button class="manual-add-btn" bindtap="handleGoAddShop">手动新增店铺</button>
+  </view>
+
+  <filter-panel
+    visible="{{filterVisible}}"
+    categoryOptions="{{categoryOptions}}"
+    selectedCategories="{{selectedCategories}}"
+    priceOptions="{{priceOptions}}"
+    selectedPrice="{{selectedPrice}}"
+    sortOptions="{{sortOptions}}"
+    selectedSort="{{selectedSort}}"
+    bind:close="handleCloseFilterPanel"
+    bind:apply="handleApplyFilter"
+  />
+</view>

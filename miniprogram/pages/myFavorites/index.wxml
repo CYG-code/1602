@@ -1,0 +1,25 @@
+<view class="favorites-page">
+  <view wx:if="{{errorMessage}}" class="error-card">{{errorMessage}}</view>
+  <view wx:if="{{loading}}" class="loading-card">加载中...</view>
+
+  <block wx:if="{{!loading && shops.length > 0}}">
+    <view class="shop-list">
+      <view wx:for="{{shops}}" wx:key="_id" class="shop-card">
+        <view class="shop-main" data-shopid="{{item._id}}" data-shopname="{{item.name}}" bindtap="handleOpenDetail">
+          <view class="shop-title">{{item.name || "未命名店铺"}}</view>
+          <view class="shop-meta">
+            <text>{{item.category || "美食"}}</text>
+            <text>评分 {{item.avgRating > 0 ? item.avgRating : "暂无"}}</text>
+            <text>{{item.checkinCount || 0}} 次打卡</text>
+          </view>
+          <view class="shop-address">{{item.address || "暂无地址信息"}}</view>
+        </view>
+        <button class="unfavorite-btn" data-shopid="{{item._id}}" bindtap="handleUnfavorite">取消收藏</button>
+      </view>
+    </view>
+  </block>
+
+  <view wx:if="{{!loading && !errorMessage && shops.length === 0}}" class="empty-card">
+    你还没有收藏店铺，去店铺详情页点“收藏”吧。
+  </view>
+</view>

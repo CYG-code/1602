@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "店铺详情",
+  "enablePullDownRefresh": true,
+  "enableShareAppMessage": true,
+  "enableShareTimeline": true,
+  "usingComponents": {
+    "login-modal": "/components/loginModal/index",
+    "checkin-item": "/components/checkinItem/index",
+    "comment-item": "/components/commentItem/index"
+  }
+}

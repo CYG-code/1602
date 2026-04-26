@@ -1,0 +1,67 @@
+<view wx:if="{{checkin}}" class="checkin-item">
+  <view class="checkin-item__top">
+    <view class="checkin-item__user">
+      <image
+        class="checkin-item__avatar"
+        src="{{(checkin.userInfo && checkin.userInfo.avatarUrl) || '/images/avatar.png'}}"
+        mode="aspectFill"
+      />
+      <view class="checkin-item__user-meta">
+        <view class="checkin-item__nick">{{(checkin.userInfo && checkin.userInfo.nickName) || "微信用户"}}</view>
+        <view wx:if="{{showShopName && checkin.shopName}}" class="checkin-item__shop">{{checkin.shopName}}</view>
+      </view>
+    </view>
+    <view class="checkin-item__time">{{createdAtText}}</view>
+  </view>
+
+  <view class="checkin-item__rating">
+    <view class="checkin-item__left">
+      <view
+        class="recommend-badge {{checkin.recommend === false ? 'recommend-badge--no' : 'recommend-badge--yes'}}"
+      >
+        {{checkin.recommend === false ? "不推荐" : "推荐"}}
+      </view>
+      <rating-stars wx:if="{{checkin.rating > 0}}" value="{{checkin.rating || 0}}" readonly size="small" />
+    </view>
+    <view wx:if="{{checkin.avgPrice > 0}}" class="checkin-item__price">人均 ¥{{checkin.avgPrice}}</view>
+  </view>
+
+  <view wx:if="{{checkin.content}}" class="checkin-item__content">{{checkin.content}}</view>
+  <view wx:if="{{checkin.dishName}}" class="checkin-item__dish">餐品：{{checkin.dishName}}</view>
+
+  <view wx:if="{{checkin.mealImages && checkin.mealImages.length > 0}}" class="checkin-item__meal-wrap">
+    <view class="checkin-item__meal-title">餐品 / 小票</view>
+    <view class="checkin-item__images">
+      <image
+        wx:for="{{checkin.mealImages}}"
+        wx:key="*this"
+        class="checkin-item__image"
+        src="{{item}}"
+        mode="aspectFill"
+        data-url="{{item}}"
+        bindtap="handlePreviewImage"
+      />
+    </view>
+  </view>
+
+  <view wx:if="{{checkin.images && checkin.images.length > 0}}" class="checkin-item__images">
+    <image
+      wx:for="{{checkin.images}}"
+      wx:key="*this"
+      class="checkin-item__image"
+      src="{{item}}"
+      mode="aspectFill"
+      data-url="{{item}}"
+      bindtap="handlePreviewImage"
+    />
+  </view>
+
+  <view class="checkin-item__actions">
+    <view class="comment-btn" bindtap="handleCommentTap">评论 {{checkin.commentCount || 0}}</view>
+    <view class="like-btn {{checkin.liked ? 'like-btn--active' : ''}}" catchtap="handleLikeTap">
+      {{checkin.liked ? "已赞" : "点赞"}} {{checkin.likeCount || 0}}
+    </view>
+    <button class="share-btn" open-type="share" data-checkin-id="{{checkin._id}}">分享</button>
+    <view wx:if="{{checkin.canDelete}}" class="delete-btn" bindtap="handleDeleteTap">删除</view>
+  </view>
+</view>

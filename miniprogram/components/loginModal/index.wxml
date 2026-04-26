@@ -1,0 +1,19 @@
+<view wx:if="{{visible}}" class="login-modal__mask" bindtap="handleMaskTap">
+  <view class="login-modal__panel" catchtap="handlePanelTap">
+    <view class="login-modal__title">{{title}}</view>
+    <view class="login-modal__desc">{{description}}</view>
+
+    <view class="login-modal__actions">
+      <button class="login-modal__btn login-modal__btn--ghost" bindtap="handleCancel">
+        取消
+      </button>
+      <button
+        class="login-modal__btn login-modal__btn--primary"
+        bindtap="handleConfirmLogin"
+        loading="{{loading}}"
+      >
+        微信授权登录
+      </button>
+    </view>
+  </view>
+</view>

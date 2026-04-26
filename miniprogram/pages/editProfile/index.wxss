@@ -1,0 +1,64 @@
+.edit-page {
+  min-height: 100vh;
+  padding: 24rpx;
+  background: linear-gradient(180deg, #eef8ef 0%, #f7f8fa 220rpx);
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 28rpx;
+  box-shadow: 0 16rpx 40rpx rgba(15, 23, 42, 0.08);
+  padding: 30rpx 26rpx;
+}
+
+.title {
+  font-size: 34rpx;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.subtitle {
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  color: #667085;
+}
+
+.avatar-btn {
+  margin-top: 20rpx;
+  background: #f8fafc;
+  border-radius: 20rpx;
+  padding: 20rpx;
+}
+
+.avatar {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 50%;
+  margin: 0 auto;
+  display: block;
+}
+
+.avatar-text {
+  margin-top: 12rpx;
+  text-align: center;
+  color: #667085;
+  font-size: 24rpx;
+}
+
+.input {
+  margin-top: 18rpx;
+  height: 82rpx;
+  border-radius: 14rpx;
+  background: #f4f6f8;
+  padding: 0 18rpx;
+  font-size: 27rpx;
+}
+
+.save-btn {
+  margin-top: 22rpx;
+  border-radius: 999rpx;
+  background: #4caf50;
+  color: #ffffff;
+  font-size: 28rpx;
+  line-height: 88rpx;
+}

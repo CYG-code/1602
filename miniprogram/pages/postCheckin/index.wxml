@@ -1,0 +1,109 @@
+<view class="checkin-page">
+  <view class="card">
+    <view class="title">发布打卡</view>
+    <view class="subtitle">店铺：{{shopName || "未命名店铺"}}</view>
+    <view wx:if="{{userProfile}}" class="user-line">
+      当前用户：{{userProfile.nickName || "微信用户"}}
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="field-title">推荐态度（必填）</view>
+    <view class="recommend-row">
+      <view
+        class="recommend-pill {{recommend === true ? 'recommend-pill--yes' : ''}}"
+        data-value="yes"
+        bindtap="handleRecommendChange"
+      >
+        推荐
+      </view>
+      <view
+        class="recommend-pill {{recommend === false ? 'recommend-pill--no' : ''}}"
+        data-value="no"
+        bindtap="handleRecommendChange"
+      >
+        不推荐
+      </view>
+    </view>
+
+    <view class="field-title">五星评分（选填）</view>
+    <rating-stars value="{{rating}}" bind:change="handleRatingChange" size="large" />
+
+    <view class="field-title">图片（最多 3 张）</view>
+    <view class="image-grid">
+      <view wx:for="{{images}}" wx:key="*this" class="image-item">
+        <image
+          class="image"
+          src="{{item}}"
+          mode="aspectFill"
+          data-url="{{item}}"
+          bindtap="handlePreviewImage"
+        />
+        <view class="image-remove" data-index="{{index}}" bindtap="handleRemoveImage">×</view>
+      </view>
+      <view wx:if="{{images.length < 3}}" class="image-add" bindtap="handleChooseImage">
+        + 添加
+      </view>
+    </view>
+
+    <view class="field-title">餐品/小票图片（选填，最多 3 张）</view>
+    <view class="field-tip">建议上传这一餐吃了什么，可拍餐品图或小票。</view>
+    <view class="image-grid">
+      <view wx:for="{{mealImages}}" wx:key="*this" class="image-item">
+        <image
+          class="image"
+          src="{{item}}"
+          mode="aspectFill"
+          data-url="{{item}}"
+          bindtap="handlePreviewMealImage"
+        />
+        <view class="image-remove" data-index="{{index}}" bindtap="handleRemoveMealImage">×</view>
+      </view>
+      <view wx:if="{{mealImages.length < 3}}" class="image-add" bindtap="handleChooseMealImage">
+        + 添加
+      </view>
+    </view>
+
+    <view class="field-title">餐品名称（选填）</view>
+    <input
+      class="input"
+      maxlength="80"
+      placeholder="例如：烤鱼+鸡爪煲、双人火锅套餐"
+      value="{{dishName}}"
+      bindinput="handleDishNameInput"
+    />
+
+    <view class="field-title">文字评价（最多 500 字）</view>
+    <textarea
+      class="textarea"
+      maxlength="500"
+      placeholder="写下你的真实体验，帮助更多同学避坑或种草"
+      value="{{content}}"
+      bindinput="handleContentInput"
+    />
+
+    <view class="field-title">人均消费（选填）</view>
+    <input
+      class="input"
+      type="digit"
+      placeholder="例如 26"
+      value="{{avgPrice}}"
+      bindinput="handleAvgPriceInput"
+    />
+  </view>
+
+  <view wx:if="{{hint}}" class="hint">{{hint}}</view>
+  <button class="submit-btn" loading="{{submitting}}" bindtap="handleSubmit">
+    提交打卡
+  </button>
+
+  <login-modal
+    visible="{{loginModalVisible}}"
+    loading="{{loginSubmitting}}"
+    title="登录后可发布打卡"
+    description="用于绑定你的打卡身份，便于后续查看和管理。"
+    bind:close="handleCloseLoginModal"
+    bind:success="handleLoginSuccess"
+    bind:error="handleLoginError"
+  />
+</view>

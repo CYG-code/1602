@@ -1,0 +1,140 @@
+<view class="add-shop-page">
+  <view class="card">
+    <view class="section-title">{{mode === 'edit' ? '编辑店铺信息' : '基础信息'}}</view>
+    <view wx:if="{{loadingShop}}" class="section-tip">正在加载店铺原始信息...</view>
+
+    <input
+      class="input"
+      placeholder="店铺名称（手动填写）"
+      value="{{shopName}}"
+      bindinput="handleNameInput"
+    />
+
+    <view class="field-title">类型</view>
+    <view class="type-wrap">
+      <view
+        wx:for="{{placeTypes}}"
+        wx:key="*this"
+        class="type-pill {{index === placeTypeIndex ? 'type-pill--active' : ''}}"
+        data-index="{{index}}"
+        bindtap="handlePlaceTypeChange"
+      >
+        {{item}}
+      </view>
+    </view>
+
+    <view class="field-title">店铺标签（可多选）</view>
+    <view class="selected-tag-wrap" wx:if="{{selectedTags.length > 0}}">
+      <view wx:for="{{selectedTags}}" wx:key="*this" class="selected-tag">
+        <text>{{item}}</text>
+        <text class="selected-tag__remove" data-tag="{{item}}" bindtap="handleRemoveSelectedTag">×</text>
+      </view>
+    </view>
+
+    <input
+      class="input"
+      placeholder="检索标签，回车可新建标签"
+      value="{{tagQuery}}"
+      bindfocus="handleTagFocus"
+      bindblur="handleTagBlur"
+      bindinput="handleTagInput"
+      bindconfirm="handleTagConfirm"
+      confirm-type="done"
+    />
+
+    <view class="tag-panel" wx:if="{{showTagPanel}}">
+      <view
+        wx:if="{{tagQuery && filteredTags.length === 0}}"
+        class="tag-panel__create"
+        bindtap="handleCreateTag"
+      >
+        无匹配标签，点击或回车新建“{{tagQuery}}”
+      </view>
+      <view
+        wx:for="{{filteredTags}}"
+        wx:key="*this"
+        class="tag-panel__item"
+        data-tag="{{item}}"
+        bindtap="handleSelectSuggestedTag"
+      >
+        {{item}}
+      </view>
+    </view>
+
+    <view class="field-title">店铺图片（1-3张）</view>
+    <view class="shop-image-grid">
+      <view
+        wx:for="{{shopImages}}"
+        wx:key="*this"
+        class="shop-image-item"
+      >
+        <image
+          class="shop-image"
+          src="{{item}}"
+          mode="aspectFill"
+          data-url="{{item}}"
+          bindtap="handlePreviewShopImage"
+        />
+        <view class="shop-image-remove" data-index="{{index}}" bindtap="handleRemoveShopImage">×</view>
+      </view>
+      <view
+        wx:if="{{shopImages.length < 3}}"
+        class="shop-image-add"
+        bindtap="handleChooseShopImage"
+      >
+        + 添加图片
+      </view>
+    </view>
+
+    <input
+      class="input"
+      placeholder="联系电话（选填）"
+      value="{{phone}}"
+      bindinput="handlePhoneInput"
+    />
+  </view>
+
+  <view class="card">
+    <view class="section-title">坐标选点与地址</view>
+    <view class="section-tip">拖动地图后自动推荐地址，也可手动编辑。</view>
+
+    <map
+      id="addShopMap"
+      class="pick-map"
+      latitude="{{latitude}}"
+      longitude="{{longitude}}"
+      scale="{{scale}}"
+      markers="{{markers}}"
+      show-location
+      bindregionchange="handleRegionChange"
+    ></map>
+
+    <view class="coord-row">
+      <view class="coord-text">纬度 {{latitude}}</view>
+      <view class="coord-text">经度 {{longitude}}</view>
+    </view>
+
+    <button class="btn-location" bindtap="handleUseCurrentLocation">使用当前位置</button>
+
+    <view wx:if="{{suggestedAddress}}" class="suggested-row">
+      <view class="suggested-text">推荐地址：{{suggestedAddress}}</view>
+      <button class="btn-suggested" bindtap="handleUseSuggestedAddress">使用推荐地址</button>
+    </view>
+
+    <input
+      class="input"
+      placeholder="店铺地址（支持手动修改）"
+      value="{{addressInput}}"
+      bindinput="handleAddressInput"
+    />
+  </view>
+
+  <view wx:if="{{errorMessage}}" class="error-card">{{errorMessage}}</view>
+  <view wx:if="{{successHint}}" class="success-card">{{successHint}}</view>
+
+  <view class="bottom-actions">
+    <button class="btn-submit" loading="{{submitting}}" bindtap="handleSubmit">
+      {{mode === 'edit' ? '保存修改' : '保存店铺'}}
+    </button>
+  </view>
+</view>

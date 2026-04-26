@@ -1,0 +1,54 @@
+.comment-item {
+  background: #f8fafc;
+  border-radius: 12rpx;
+  padding: 14rpx;
+}
+
+.comment-item + .comment-item {
+  margin-top: 8rpx;
+}
+
+.comment-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12rpx;
+}
+
+.comment-nick {
+  color: #1f2937;
+  font-size: 22rpx;
+  font-weight: 600;
+}
+
+.comment-time {
+  color: #98a2b3;
+  font-size: 20rpx;
+}
+
+.comment-content {
+  margin-top: 8rpx;
+  color: #344054;
+  font-size: 23rpx;
+  line-height: 1.6;
+}
+
+.reply-prefix {
+  color: #2f7d32;
+}
+
+.comment-reply {
+  color: #2f7d32;
+  font-size: 22rpx;
+}
+
+.comment-actions {
+  margin-top: 8rpx;
+  display: flex;
+  align-items: center;
+  gap: 14rpx;
+}
+
+.comment-delete {
+  color: #b42318;
+  font-size: 22rpx;
+}

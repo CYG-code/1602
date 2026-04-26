@@ -1,0 +1,30 @@
+.stars {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+}
+
+.star {
+  color: #d0d5dd;
+  line-height: 1;
+}
+
+.star--active {
+  color: #ffc107;
+}
+
+.star--readonly {
+  pointer-events: none;
+}
+
+.stars--small .star {
+  font-size: 28rpx;
+}
+
+.stars--medium .star {
+  font-size: 38rpx;
+}
+
+.stars--large .star {
+  font-size: 48rpx;
+}

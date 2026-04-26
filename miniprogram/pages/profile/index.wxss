@@ -1,0 +1,82 @@
+.profile-page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #eef8ef 0%, #f7f8fa 220rpx);
+  padding: 24rpx;
+}
+
+.profile-card,
+.menu-card {
+  background: #ffffff;
+  border-radius: 28rpx;
+  box-shadow: 0 16rpx 40rpx rgba(15, 23, 42, 0.08);
+}
+
+.profile-card {
+  padding: 34rpx 28rpx;
+  text-align: center;
+}
+
+.avatar {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 50%;
+  margin: 0 auto;
+}
+
+.nick {
+  margin-top: 20rpx;
+  font-size: 34rpx;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.sub {
+  margin-top: 10rpx;
+  font-size: 25rpx;
+  color: #667085;
+  line-height: 1.6;
+}
+
+.login-btn {
+  margin-top: 20rpx;
+  border-radius: 999rpx;
+  background: #4caf50;
+  color: #ffffff;
+  font-size: 26rpx;
+  line-height: 82rpx;
+}
+
+.edit-btn {
+  margin-top: 18rpx;
+  border-radius: 999rpx;
+  background: rgba(76, 175, 80, 0.14);
+  color: #2f7d32;
+  font-size: 24rpx;
+  line-height: 72rpx;
+}
+
+.menu-card {
+  margin-top: 18rpx;
+  padding: 8rpx 18rpx;
+}
+
+.menu-item {
+  height: 96rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu-item + .menu-item {
+  border-top: 1rpx solid #eef2f6;
+}
+
+.menu-title {
+  font-size: 28rpx;
+  color: #1f2937;
+}
+
+.menu-arrow {
+  color: #98a2b3;
+  font-size: 26rpx;
+}

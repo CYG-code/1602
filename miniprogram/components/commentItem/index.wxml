@@ -1,0 +1,16 @@
+<view wx:if="{{comment}}" class="comment-item">
+  <view class="comment-head">
+    <view class="comment-nick">{{(comment.userInfo && comment.userInfo.nickName) || "微信用户"}}</view>
+    <view class="comment-time">{{createdAtText}}</view>
+  </view>
+  <view class="comment-content">
+    <text wx:if="{{comment.replyTo && comment.replyTo.nickName}}" class="reply-prefix">
+      回复 @{{comment.replyTo.nickName}}：
+    </text>
+    <text>{{comment.content}}</text>
+  </view>
+  <view class="comment-actions">
+    <view class="comment-reply" bindtap="handleReplyTap">回复</view>
+    <view wx:if="{{comment.canDelete}}" class="comment-delete" bindtap="handleDeleteTap">删除</view>
+  </view>
+</view>

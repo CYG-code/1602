@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "首页",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "shop-card": "/components/shopCard/index",
+    "filter-panel": "/components/filterPanel/index"
+  }
+}

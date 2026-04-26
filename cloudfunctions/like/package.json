@@ -1,0 +1,12 @@
+{
+  "name": "like",
+  "version": "1.0.0",
+  "description": "Toggle likes for checkins",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"No tests configured\""
+  },
+  "dependencies": {
+    "wx-server-sdk": "~2.4.0"
+  }
+}

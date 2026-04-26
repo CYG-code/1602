@@ -1,0 +1,162 @@
+<view class="detail-page">
+  <view class="detail-content">
+    <view wx:if="{{loading}}" class="state-card">
+      <view class="state-title">正在加载店铺详情...</view>
+    </view>
+
+    <view wx:elif="{{errorMessage}}" class="state-card state-card--error">
+      <view class="state-title">加载失败</view>
+      <view class="state-text">{{errorMessage}}</view>
+      <button class="retry-btn" bindtap="handleRetry">重试</button>
+    </view>
+
+    <block wx:elif="{{shop}}">
+      <view class="summary-card">
+        <view class="summary-top">
+          <view class="shop-title">{{shop.name || "店铺"}}</view>
+          <view class="summary-actions">
+            <button
+              wx:if="{{canEditShop}}"
+              class="edit-btn"
+              bindtap="handleGoEditShop"
+            >
+              编辑店铺
+            </button>
+            <button
+              class="favorite-btn {{isFavorited ? 'favorite-btn--active' : ''}}"
+              loading="{{favoriting}}"
+              bindtap="handleToggleFavorite"
+            >
+              {{isFavorited ? "已收藏" : "收藏"}}
+            </button>
+          </view>
+        </view>
+
+        <view class="tag-row">
+          <view class="tag">{{shop.category || "美食"}}</view>
+          <view class="tag">评分 {{displayRating}}</view>
+          <view class="tag">人均 {{displayAvgPrice}}</view>
+          <view class="tag">{{shop.checkinCount || 0}} 次打卡</view>
+        </view>
+
+        <view wx:if="{{shop.images && shop.images.length > 0}}" class="shop-image-list">
+          <image
+            wx:for="{{shop.images}}"
+            wx:key="*this"
+            class="shop-image"
+            src="{{item}}"
+            mode="aspectFill"
+            data-url="{{item}}"
+            bindtap="handlePreviewShopImage"
+          />
+        </view>
+
+        <view class="info-item">
+          <view class="label">地址</view>
+          <view class="value">{{shop.address || "暂无地址信息"}}</view>
+        </view>
+
+        <view class="info-item info-item--link" bindtap="handleCallPhone">
+          <view class="label">电话</view>
+          <view class="value {{hasPhone ? 'value--link' : ''}}">
+            {{hasPhone ? (shop.phone || shop.tel) : "暂无电话"}}
+          </view>
+        </view>
+      </view>
+
+      <view class="checkin-card">
+        <view class="section-title">打卡列表</view>
+        <view wx:if="{{checkinsError}}" class="checkin-error">{{checkinsError}}</view>
+        <view wx:if="{{checkinsLoading && checkins.length === 0}}" class="checkin-loading">加载中...</view>
+
+        <block wx:if="{{checkins.length > 0}}">
+          <view class="checkin-list">
+            <view wx:for="{{checkins}}" wx:key="_id" class="checkin-item-wrap">
+              <checkin-item
+                checkin="{{item}}"
+                bind:liketap="handleCheckinLikeTap"
+                bind:commenttap="handleCheckinCommentTap"
+                bind:deletetap="handleCheckinDeleteTap"
+              />
+
+              <view wx:if="{{activeCommentCheckinId === item._id}}" class="comment-panel">
+                <view wx:if="{{commentsLoading}}" class="comment-loading">评论加载中...</view>
+                <view wx:if="{{commentsError}}" class="comment-error">{{commentsError}}</view>
+
+                <view wx:if="{{comments.length > 0}}" class="comment-list">
+                  <comment-item
+                    wx:for="{{comments}}"
+                    wx:key="_id"
+                    comment="{{item}}"
+                    bind:replytap="handleReplyComment"
+                    bind:deletetap="handleCommentDeleteTap"
+                  />
+                </view>
+
+                <view wx:if="{{!commentsLoading && comments.length === 0}}" class="comment-empty">
+                  还没有评论，来抢沙发吧。
+                </view>
+
+                <view wx:if="{{replyTo}}" class="reply-hint">
+                  <text>回复 @{{replyTo.nickName}}</text>
+                  <text class="reply-cancel" bindtap="handleCancelReply">取消</text>
+                </view>
+
+                <view class="comment-input-row">
+                  <input
+                    class="comment-input"
+                    maxlength="300"
+                    placeholder="{{replyTo ? ('回复 @' + replyTo.nickName) : '说点什么...'}}"
+                    value="{{commentInput}}"
+                    bindinput="handleCommentInput"
+                  />
+                  <button
+                    class="comment-submit-btn"
+                    loading="{{commentSubmitting}}"
+                    bindtap="handleSubmitComment"
+                  >
+                    发送
+                  </button>
+                </view>
+              </view>
+            </view>
+          </view>
+          <button
+            wx:if="{{checkinsHasMore}}"
+            class="load-more-btn"
+            loading="{{checkinsLoading}}"
+            bindtap="handleLoadMoreCheckins"
+          >
+            加载更多
+          </button>
+        </block>
+
+        <block wx:elif="{{!checkinsLoading}}">
+          <view class="empty-title">还没有人打卡，快来第一个吧</view>
+          <view class="empty-text">发布第一条打卡，帮助更多同学了解这家店。</view>
+        </block>
+      </view>
+    </block>
+  </view>
+
+  <view class="action-bar" wx:if="{{shop}}">
+    <button class="action-btn action-btn--primary" bindtap="handleGoPostCheckin">我要打卡</button>
+    <button
+      class="action-btn action-btn--secondary"
+      bindtap="handleOpenLocation"
+      disabled="{{!canOpenLocation}}"
+    >
+      导航到店
+    </button>
+  </view>
+
+  <login-modal
+    visible="{{loginModalVisible}}"
+    loading="{{loginSubmitting}}"
+    title="登录后可继续操作"
+    description="用于记录收藏、点赞与评论身份。"
+    bind:close="handleCloseLoginModal"
+    bind:success="handleLoginSuccess"
+    bind:error="handleLoginError"
+  />
+</view>

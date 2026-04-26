@@ -1,0 +1,51 @@
+.my-checkins-page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #eef8ef 0%, #f7f8fa 220rpx);
+  padding: 24rpx;
+}
+
+.error-card,
+.loading-card,
+.empty-card {
+  background: #ffffff;
+  border-radius: 20rpx;
+  padding: 20rpx;
+  font-size: 25rpx;
+  box-shadow: 0 10rpx 24rpx rgba(15, 23, 42, 0.06);
+}
+
+.error-card {
+  color: #b42318;
+  background: rgba(255, 86, 48, 0.08);
+}
+
+.loading-card,
+.empty-card {
+  color: #475467;
+}
+
+.list-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.list-item {
+  border-radius: 20rpx;
+}
+
+.go-shop-btn {
+  margin-top: 10rpx;
+  color: #2f7d32;
+  font-size: 24rpx;
+  padding: 6rpx 4rpx 2rpx;
+}
+
+.load-more-btn {
+  margin-top: 14rpx;
+  border-radius: 999rpx;
+  background: #eef2f6;
+  color: #475467;
+  font-size: 24rpx;
+  line-height: 72rpx;
+}

@@ -1,0 +1,62 @@
+.shop-card {
+  background: #ffffff;
+  border-radius: 28rpx;
+  padding: 28rpx;
+  box-shadow: 0 16rpx 40rpx rgba(15, 23, 42, 0.12);
+}
+
+.shop-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20rpx;
+}
+
+.shop-card__title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.shop-card__category {
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  color: #667085;
+}
+
+.shop-card__badge {
+  padding: 8rpx 16rpx;
+  border-radius: 999rpx;
+  background: rgba(76, 175, 80, 0.12);
+  color: #388e3c;
+  font-size: 22rpx;
+}
+
+.shop-card__meta {
+  display: flex;
+  gap: 16rpx;
+  flex-wrap: wrap;
+  margin-top: 20rpx;
+}
+
+.shop-card__meta-item {
+  padding: 10rpx 16rpx;
+  border-radius: 999rpx;
+  background: #f4f6f8;
+  color: #475467;
+  font-size: 24rpx;
+}
+
+.shop-card__address {
+  margin-top: 18rpx;
+  color: #667085;
+  font-size: 24rpx;
+  line-height: 1.6;
+}
+
+.shop-card__action {
+  margin-top: 22rpx;
+  color: #4caf50;
+  font-size: 26rpx;
+  font-weight: 600;
+}

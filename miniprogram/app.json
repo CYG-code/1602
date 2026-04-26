@@ -1,0 +1,47 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/shopDetail/index",
+    "pages/postCheckin/index",
+    "pages/addShop/index",
+    "pages/profile/index",
+    "pages/editProfile/index",
+    "pages/myCheckins/index",
+    "pages/myFavorites/index"
+  ],
+  "window": {
+    "backgroundColor": "#F7F8FA",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#F7F8FA",
+    "navigationBarTitleText": "1602\u7f8e\u98df\u5f55",
+    "navigationBarTextStyle": "black"
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "\u4f60\u7684\u4f4d\u7f6e\u4fe1\u606f\u5c06\u7528\u4e8e\u83b7\u53d6\u9644\u8fd1\u5e97\u94fa\u5e76\u5728\u5730\u56fe\u4e0a\u663e\u793a"
+    }
+  },
+  "tabBar": {
+    "color": "#7A8599",
+    "selectedColor": "#4CAF50",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "\u9996\u9875",
+        "iconPath": "images/icons/home.png",
+        "selectedIconPath": "images/icons/home-active.png"
+      },
+      {
+        "pagePath": "pages/profile/index",
+        "text": "\u6211\u7684",
+        "iconPath": "images/icons/usercenter.png",
+        "selectedIconPath": "images/icons/usercenter-active.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2",
+  "lazyCodeLoading": "requiredComponents"
+}

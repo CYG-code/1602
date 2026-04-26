@@ -1,0 +1,12 @@
+{
+  "name": "checkin",
+  "version": "1.0.0",
+  "description": "Create and query checkins",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"No tests configured\""
+  },
+  "dependencies": {
+    "wx-server-sdk": "~2.4.0"
+  }
+}

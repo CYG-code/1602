@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "发布打卡",
+  "usingComponents": {
+    "login-modal": "/components/loginModal/index",
+    "rating-stars": "/components/ratingStars/index"
+  }
+}

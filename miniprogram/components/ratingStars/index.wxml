@@ -1,0 +1,11 @@
+<view class="stars stars--{{size}}">
+  <view
+    wx:for="{{stars}}"
+    wx:key="*this"
+    class="star {{item <= value ? 'star--active' : ''}} {{readonly ? 'star--readonly' : ''}}"
+    data-value="{{item}}"
+    bindtap="handleTap"
+  >
+    ★
+  </view>
+</view>

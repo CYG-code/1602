@@ -1,0 +1,17 @@
+<view wx:if="{{shop}}" class="shop-card" bindtap="handleCardTap">
+  <view class="shop-card__header">
+    <view>
+      <view class="shop-card__title">{{shop.name}}</view>
+      <view class="shop-card__category">{{shop.category}} · {{distanceText}}</view>
+    </view>
+    <view class="shop-card__badge">附近</view>
+  </view>
+
+  <view class="shop-card__meta">
+    <view class="shop-card__meta-item">评分 {{ratingText}}</view>
+    <view class="shop-card__meta-item">{{checkinText}}</view>
+  </view>
+
+  <view class="shop-card__address">{{shop.address || "暂无地址信息"}}</view>
+  <view class="shop-card__action">查看店铺详情</view>
+</view>

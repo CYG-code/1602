@@ -1,0 +1,12 @@
+{
+  "name": "shop",
+  "version": "1.0.0",
+  "description": "Nearby shop query for 1602 mini program",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"No tests configured\""
+  },
+  "dependencies": {
+    "wx-server-sdk": "~2.4.0"
+  }
+}

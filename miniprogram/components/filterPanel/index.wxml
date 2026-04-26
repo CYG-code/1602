@@ -1,0 +1,58 @@
+<view wx:if="{{visible}}" class="filter-mask" bindtap="handleMaskTap">
+  <view class="filter-panel" catchtap="handlePanelTap">
+    <view class="filter-head">
+      <view class="filter-title">筛选</view>
+      <view class="filter-close" bindtap="handleClose">关闭</view>
+    </view>
+
+    <view class="group">
+      <view class="group-title">菜系（多选）</view>
+      <view class="chip-wrap">
+        <view
+          wx:for="{{categoryOptions}}"
+          wx:key="value"
+          class="chip {{localCategories.includes(item.value) ? 'chip--active' : ''}}"
+          data-value="{{item.value}}"
+          bindtap="handleToggleCategory"
+        >
+          {{item.label}}
+        </view>
+      </view>
+    </view>
+
+    <view class="group">
+      <view class="group-title">价格区间（单选）</view>
+      <view class="chip-wrap">
+        <view
+          wx:for="{{priceOptions}}"
+          wx:key="value"
+          class="chip {{localPrice === item.value ? 'chip--active' : ''}}"
+          data-value="{{item.value}}"
+          bindtap="handleSelectPrice"
+        >
+          {{item.label}}
+        </view>
+      </view>
+    </view>
+
+    <view class="group">
+      <view class="group-title">排序（单选）</view>
+      <view class="chip-wrap">
+        <view
+          wx:for="{{sortOptions}}"
+          wx:key="value"
+          class="chip {{localSort === item.value ? 'chip--active' : ''}}"
+          data-value="{{item.value}}"
+          bindtap="handleSelectSort"
+        >
+          {{item.label}}
+        </view>
+      </view>
+    </view>
+
+    <view class="actions">
+      <button class="btn btn--ghost" bindtap="handleReset">重置</button>
+      <button class="btn btn--primary" bindtap="handleApply">应用筛选</button>
+    </view>
+  </view>
+</view>
